@@ -1,10 +1,22 @@
 function loadedAllCets(){
     document.getElementById('card-container').innerHTML=""
+    document.getElementById('picture').innerHTML=""
     fetch('https://openapi.programming-hero.com/api/peddy/pets')
     .then((res) => res.json())
     .then((data) => {
         data.pets.forEach(element => {
     
+            const imgparent = document.getElementById('picture')
+            const imagediv = document.createElement('div');
+
+            imagediv.innerHTML= `
+            <div class="border fresh-border rounded-md"><img src="${element.image}" alt=""></div>
+            
+            
+            `
+            imgparent.appendChild(imagediv);
+
+
             const parent = document.getElementById('card-container');
 
             const div = document.createElement('div');
@@ -96,6 +108,7 @@ for (const btn of allCetagoryBtn) {
         btn.classList.add('rounded-full', 'fresh', 'text-white')
 
         document.getElementById('card-container').innerHTML=""
+        document.getElementById('picture').innerHTML=""
         fetch(`https://openapi.programming-hero.com/api/peddy/category/${singularCetagory}`)
         .then((res) => res.json())
         .then((items) =>loadedAllCets(items.data))
